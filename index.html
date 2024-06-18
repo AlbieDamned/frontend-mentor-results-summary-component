@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- displays site properly based on user's device -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/images/favicon-32x32.png"
+   >
+
+    <title>Frontend Mentor | Results summary component</title>
+
+    <!-- link to stylesheet -->
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+    <main>
+      <section class="results">
+        <h2>Your Result</h2>
+        <div class="results__overall">
+          <span class="results__overall-value">76</span>
+          of 100
+        </div>
+        <div class="results__desc">
+          <h3>Great</h3>
+          <p>
+            You scored higher than 65% of the people who have taken these tests.
+          </p>
+        </div>
+      </section>
+      <section class="summary">
+        <h2>Summary</h2>
+        <div class="summary__categories"></div>
+        <button class="button">Continue</button>
+      </section>
+    </main>
+
+    <!-- <footer class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Your Name Here</a>.
+    </footer> -->
+
+    <!-- script for categories -->
+    <script>
+      const categories = document.querySelector(".summary__categories");
+
+      fetch("data.json")
+        .then((res) => res.json())
+        .then((data) => {
+          data.forEach((category) => {
+            categories.insertAdjacentHTML(
+              "beforeend",
+              `<div
+                class="category"
+                data-category="${category.name}"
+                style="background: ${category.background}"
+              >
+                <div class="category__label">
+                  <img src="${category.icon}" alt="">
+                  <span
+                    class="category__name"
+                    style="color: ${category.color}"
+                  >
+                    ${category.name}
+                  </span>
+                </div>
+                <p class="category__score">
+                  <span
+                    class="category__score-value"
+                    data-category-score="${category.score}">
+                    ${category.score}
+                  </span>
+                  &nbsp;/ 100</p>
+              </div>`
+            );
+          });
+        });
+    </script>
+  </body>
+</html>
